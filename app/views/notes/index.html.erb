@@ -1,6 +1,10 @@
 <div class = "well">
 <td><%= link_to 'New Note', new_note_path ,class: "btn btn-info btn-sm"%></td>
 <h1 style = "color: green;text-align: center"><b><u>Listing Notes</u></b></h1>
+<%= form_tag notes_path, method: 'get' do %>
+<%=text_field_tag :search,params[:search]%>
+<%=submit_tag 'search'%>
+<%end%>
 <table class="table">
   <tr>
     <th>Title</th>

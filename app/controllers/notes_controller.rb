@@ -2,7 +2,7 @@ class NotesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :find_note, only: [:show, :update, :destroy, :edit]
 	def index
-		@notes = Note.order(created_at: 'DESC').all
+		@notes = Note.search(params[:search])
 	end
 
 	def new
