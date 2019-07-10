@@ -1,0 +1,23 @@
+<div class = "well">
+<td><%= link_to 'New Note', new_note_path ,class: "btn btn-info btn-sm"%></td>
+<h1 style = "color: green;text-align: center"><b><u>Listing Notes</u></b></h1>
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th>Tag</th>
+  </tr>
+ 
+  <% @notes.each do |n| %>
+    <tr>
+      <td><%= n.title %></td>
+      <td><%= n.body %></td>
+      <td><%= n.tag %></td>
+      <td><%= link_to 'Show Note', note_path(n) %></td>
+      <td><%= link_to 'Edit Note', edit_note_path(n) %></td>
+      <td><%= link_to 'Delete',note_path(n),
+         method: :delete,data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+</div>

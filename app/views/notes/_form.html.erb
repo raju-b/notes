@@ -1,0 +1,23 @@
+<div class="col-md-4 col-md-offset-4 container">
+<%= form_with model: @note, local: true do |form| %>
+  <span class="border border-light">
+  <p>
+    <%= form.label :title,required: true %><br>
+    <%= form.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.label :tag %><br>
+    <%= form.text_field :tag %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+</span>
+<% end %>
+</div>

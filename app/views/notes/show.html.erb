@@ -1,0 +1,26 @@
+<h1 style = "color: green;text-align: center"><b><u>Showing a Note</u></b></h1>
+<div class="col-md-6">
+
+<div class ="container">
+<p>
+  <strong>Title:</strong>
+  <%= @note.title %>
+</p>
+ 
+<p>
+  <strong>Body:</strong>
+  <%= @note.body %>
+</p>
+<p>
+  <strong>Tag:</strong>
+  <%= @note.tag %>
+</p>
+<p>
+  <strong>Creted_at:</strong>
+  <%= @note.created_at %>
+</p>
+
+<%= link_to 'Edit Note', edit_note_path(@note) ,class: "btn btn-info"%>
+<%= link_to 'Notes List', notes_path ,class: "btn btn-info"%>
+</div>
+</div>
