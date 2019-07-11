@@ -1,4 +1,13 @@
 <div class="col-md-4 col-md-offset-4 container">
+  <div class="well">
+  <%if @note.errors.any? %>
+  <ul>
+    <% @note.errors.full_messages.each do |mess| %>
+    
+      <li><%= mess %></li>
+  </ul>
+     <% end %>
+<% end %>
 <%= form_with model: @note, local: true do |form| %>
   <span class="border border-light">
   <p>
@@ -20,4 +29,6 @@
   </p>
 </span>
 <% end %>
+<%= link_to 'Notes List', notes_path ,class: "btn btn-info"%>
+</div>
 </div>
