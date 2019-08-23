@@ -1,0 +1,31 @@
+<div class = "well">
+  <%if is_student?%>
+  <h3 style = "color: green;">Hello <%= current_user.email.split('@')[0].capitalize%></h3>
+    <h1 style = "color: green;text-align: center"><b><u> BarrowBooks</u></b></h1>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>BookName</th>
+        <th>Issued on</th>
+        <th>Expired on</th>
+        <th>Returned on</th>
+        <th>Fine</th>
+      </tr>
+      <tbody>
+        <% @borrowed_books.each do |borrower| %>
+          <tr>
+            <td><%= borrower.student.email.split('@')[0].capitalize %></td>
+            <td><%= @note.try(:title)%></td>
+            <td><%= borrower.issued_date.strftime("%d-%m-%Y") %></td>
+            <td><%= borrower.expired_date.strftime("%d-%m-%Y") %></td>
+            <td><%= borrower.is_returned? ? borrower.updated_at.strftime("%d-%m-%Y") : "--"%></td>
+            <td><%= (borrower.expired_date.to_date..Date.today).count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <a href="javascript:history.back()" class="btn btn-primary">BACK</a>
+    </table>
+  <%else%>
+    <center class="text-danger">Not authorized to acces this page.</center>
+  <%end%>
+</div>

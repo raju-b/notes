@@ -1,0 +1,22 @@
+<div class = "well">
+  <%if is_admin?%>
+    <h1 style = "color: green;text-align: center"><b><u>Students</u></b></h1>
+    <table class="table">
+      <tr>
+        <th>Email</th>
+        <th>Borrowed books Qt</th>
+        <th>Manage</th>
+      </tr>
+      <tbody>
+        <% @students.each do |stud| %>
+          <tr>
+            <td><%= stud.email %></td>
+            <td><%= stud.borrow_books.active.length rescue 0%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <%else%>
+    <center class="text-danger">Not authorized to acceses this page.</center>
+  <%end%>
+</div>

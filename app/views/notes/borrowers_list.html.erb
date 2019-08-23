@@ -1,0 +1,37 @@
+<div class = "well">
+  <%if is_admin?%>
+    <h1 style = "color: green;text-align: center"><b><u>Students</u></b></h1>
+    <table class="table">
+      <tr>
+        <th>Email</th>
+        <th>Issued on</th>
+        <th>Expired on</th>
+        <th>Returned on</th>
+        <th>Fine</th>
+        <th>Manage</th>
+      </tr>
+      <tbody>
+        <% @borrowers.each do |borrower| %>
+          <tr>
+            <td><%= borrower.student.email %></td>
+            <td><%= borrower.issued_date.strftime("%d-%m-%Y") %></td>
+            <td><%= borrower.expired_date.strftime("%d-%m-%Y") %></td>
+            <td><%= borrower.is_returned? ? borrower.updated_at.strftime("%d-%m-%Y") : "--"%></td>
+            <td><%= (borrower.expired_date.to_date..Date.today).count %></td>
+            <td>
+              <%if !borrower.is_returned?%>
+
+                <%= link_to 'Return book',return_notes_path(id: borrower.id),class: "btn btn-primary", method: :get %>
+              <%else%>
+                NA
+              <%end%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      <a href="javascript:history.back()" class="btn btn-primary" >BACK</a>
+    </table>
+  <%else%>
+    <center class="text-danger">Not authorized to acces this page.</center>
+  <%end%>
+</div>

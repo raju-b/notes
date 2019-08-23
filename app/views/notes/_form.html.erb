@@ -6,7 +6,7 @@
   <p>
     <%= form.label :title,required: true %><br>
     <%= form.text_field :title %>
-    <span style="color:red;"><%= @note.errors[:title][0] %></span><br><br>
+    <span class="text-danger"><%= @note.errors[:title][0] %></span><br><br>
   </p>
  
   <p>
@@ -17,9 +17,15 @@
     <%= form.label :tag %><br>
     <%= form.text_field :tag %>
   </p>
+
+  <p>
+    <%= form.label :number_of_books %><br>
+    <%= form.text_field :number_of_books %>
+    <span class="text-danger"><%= @note.errors[:number_of_books][0] %></span><br><br>
+  </p>
  
   <p>
-    <%= form.submit %>
+    <%= form.submit :Submit, class: 'btn btn-primary' %>
     <%= link_to 'NoteBook List', notes_path ,class: "btn btn-info"%>
   </p>
 </span>

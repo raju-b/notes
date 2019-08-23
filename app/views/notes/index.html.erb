@@ -1,5 +1,10 @@
 <div class = "well">
-<td><%= link_to 'New NoteBook', new_note_path ,class: "btn btn-info btn-sm"%></td>
+  <%if is_admin?%>
+  <h5 style = "color: green;"><b>Hello Admin</b></h5>
+    <p><%= link_to 'New NoteBook', new_note_path ,class: "btn btn-info btn-sm"%></p>
+  <%else%>
+  <h3 style = "color: green;"><b>Hello <%= current_user.email.split('@')[0].capitalize%></b></h3>
+  <%end%>
 <h1 style = "color: green;text-align: center"><b><u>Listing Books</u></b></h1>
 <%= form_tag notes_path, method: 'get' do %>
 <%=text_field_tag :search,params[:search],placeholder: "Enter Book Title"%>
@@ -8,20 +13,39 @@
 <table class="table">
   <tr>
     <th>Title</th>
+    <th>Quantity</th>
     <th>Body</th>
     <th>Tag</th>
+    <th>Manage</th>
   </tr>
- 
-  <% @notes.each do |n| %>
-    <tr>
-      <td><%= n.title %></td>
-      <td><%= n.body %></td>
-      <td><%= n.tag %></td>
-      <td><%= link_to 'Show Note', note_path(n) %></td>
-      <td><%= link_to 'Edit Note', edit_note_path(n) %></td>
-      <td><%= link_to 'Delete',note_path(n),
-         method: :delete,data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
+  <tbody>
+    <% @notes.each do |n| %>
+      <tr>
+        <td><%= n.title %></td>
+        <td><%= n.try(:number_of_books)%></td>
+        <td><%= n.body %></td>
+        <td><%= n.tag %></td>
+        <td>
+          <%if is_admin?%>
+            <%= link_to 'Show', note_path(n), class: "btn btn-success" %>
+            <%= link_to 'Edit', edit_note_path(n), class: "btn btn-primary" %>
+            <%= link_to 'Delete',note_path(n),class: "btn btn-danger", method: :delete,data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Borrowers',borrowers_list_notes_path(id: n.id),class: "btn btn-info", method: :get %>
+          <%elsif is_student?%>
+            <%= link_to 'Borrow Book', borrow_notes_path(id: n.id), class: "btn btn-primary" %>
+            <%= link_to 'Borrowed Book History', student_path(id: current_user.id,note_id: n.id), class: "btn btn-success" %>
+          <%end%> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+  // $(".alert-success").hide();
+    $(".alert-success").fadeTo(2000, 500).slideUp(500, function() {
+      $(".alert-success").slideUp(500);
+    });
+  });
+</script>
