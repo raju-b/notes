@@ -22,7 +22,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 gem 'jquery-rails'
 #devise Gem for user authentication
-gem 'devise', '~> 4.2'
+gem 'devise', '~> 4.7'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
